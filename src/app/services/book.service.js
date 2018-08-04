@@ -33,4 +33,12 @@ export function BookService() {
    * Вернуть список книг
    */
   this.getBooks = () => bookList;
+
+  /**
+   * Удалить книгу
+   */
+  this.destroyBook = (book) => {
+    let index = bookList.findIndex((el) => el == book);
+    bookList.splice(index, 1);
+  };
 }
