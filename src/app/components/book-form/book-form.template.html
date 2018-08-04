@@ -1,0 +1,94 @@
+<div class="row book-form">
+  <div class="col-sm-8 col-sm-offset-2">
+    <div class="well">
+      <h3>
+        <span ng-show="!$ctrl.book.id">Новая книга</span>
+        <span ng-show="$ctrl.book.id">Редакитрование книги</span>
+      </h3>
+      <form name="$ctrl.form" ng-submit="$ctrl.saveData($ctrl.form)">
+        <div class="form-group">
+          <label for="title">Заголовок</label>
+          <input type="text" class="form-control" name="title" id="title" ng-model="$ctrl.book.title" ng-required="true" ng-maxlength="30">
+          <div ng-messages="$ctrl.form.title.$error" class="help-block text-danger">
+            <div ng-message="required">Не может быть пустым</div>
+            <div ng-message="maxlength">Не более 30 символов</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div>
+            <label>Авторы</label>
+            <button class="btn btn-default btn-sm" ng-click="$ctrl.addAuthor($event);">Добавить</button>
+            <input style="display: none;" type="number" name="authorsCount" ng-model="$ctrl.book.authors.length" ng-min="1">
+            <div ng-messages="$ctrl.form.authorsCount.$error" class="help-block text-danger">
+              <div ng-message="min">Необходим хотя бы один автор</div>
+            </div>
+          </div>
+          <div ng-repeat="author in $ctrl.book.authors">
+            <div class="row">
+              <div class="col-sm-6">
+                <input type="text" class="form-control" name="authors[{{$index}}][fName]" id="authors[{{$index}}][fName]" ng-model="author.fName" ng-required="true" ng-maxlength="20" placeholder="Имя">
+                <div ng-messages="$ctrl.form['authors['+$index+'][fName]'].$error" class="help-block text-danger">
+                  <div ng-message="required">Не может быть пустым</div>
+                  <div ng-message="maxlength">Не более 20 символов</div>
+                </div>
+              </div>
+              <div class="col-sm-5">
+                <input type="text" class="form-control" name="authors[{{$index}}][sName]" id="authors[{{$index}}][sName]" ng-model="author.sName" ng-required="true" ng-maxlength="20" placeholder="Фамилия">
+                <div ng-messages="$ctrl.form['authors['+$index+'][sName]'].$error" class="help-block text-danger">
+                  <div ng-message="required">Не может быть пустым</div>
+                  <div ng-message="maxlength">Не более 20 символов</div>
+                </div>
+              </div>
+              <div class="col-sm-1">
+                <i class="fa fa-minus-square-o fa-2x" ng-click="$ctrl.destroyAuthor($event, $index);"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="pageCount">Количество страниц</label>
+          <input type="number" class="form-control" name="pageCount" id="pageCount" ng-model="$ctrl.book.pageCount" ng-required="true" ng-min="1" ng-max="10000">
+          <div ng-messages="$ctrl.form.pageCount.$error" class="help-block text-danger">
+            <div ng-message="required">Не может быть пустым</div>
+            <div ng-message="max">Должно быть от 1 до 10000</div>
+            <div ng-message="min">Должно быть от 1 до 10000</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="publishHouse">Название издательства</label>
+          <input type="text" class="form-control" name="publishHouse" id="publishHouse" ng-model="$ctrl.book.publishHouse" ng-maxlength="30">
+          <div ng-messages="$ctrl.form.publishHouse.$error" class="help-block text-danger">
+            <div ng-message="maxlength">Не более 30 символов</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="publishDate">Год публикации</label>
+          <input type="number" class="form-control" name="publishDate" id="publishDate" ng-model="$ctrl.book.publishDate" ng-min="1800">
+          <div ng-messages="$ctrl.form.publishDate.$error" class="help-block text-danger">
+            <div ng-message="min">Должен быть от 1800</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="releaseDate">Дата выхода в тираж</label>
+          <input type="date" class="form-control" name="releaseDate" id="releaseDate" ng-model="$ctrl.book.releaseDate" min="1800-01-01">
+          <div ng-messages="$ctrl.form.releaseDate.$error" class="help-block text-danger">
+            <div ng-message="min">Должна быть от 01-01-1800</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="isbn">ISBN</label>
+          <input type="text" class="form-control" name="isbn" id="isbn" ng-model="$ctrl.book.isbn" isbn-validator>
+          <div ng-messages="$ctrl.form.isbn.$error" class="help-block text-danger">
+            <div ng-message="invanlidIsbn">Некорректный ISBN</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="image">Изображение</label>
+          <input type="file" class="form-control" name="image" id="image" file-upload>
+        </div>
+        <input type="submit" value="Готово" class="btn btn-success btn-sm">
+        <button type="button" ui-sref="books" class="btn btn-default btn-sm">Отменить</button>
+      </form>
+    </div>
+  </div>
+</div>

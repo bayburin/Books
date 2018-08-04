@@ -32,6 +32,8 @@
   },
   "dependencies": {
     "angular": "^1.7.2",
+    "angular-messages": "^1.7.2",
+    "angular-ui-router": "^1.0.19",
     "bootstrap3": "^3.3.5",
     "font-awesome": "^4.7.0",
     "jquery": "^3.3.1"
