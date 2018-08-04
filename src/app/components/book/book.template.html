@@ -1,5 +1,5 @@
 <div class="col-sm-3">
-  <div class="thumbnail">
+  <div class="thumbnail" ng-click="$ctrl.showBook($ctrl.book)">
     <div class="caption">
       <span class="title">
         <h4 ng-bind="$ctrl.book.title"></h4>
@@ -12,7 +12,7 @@
         <i class="fa fa-pencil-square-o fa-fw hidden-lg"></i>
         <span class="hidden-sm hidden-xs hidden-md">Редактировать</span>
       </button>
-      <button ng-click="$ctrl.destroyBook()" class="btn btn-danger btn-sm">
+      <button ng-click="$ctrl.destroyBook($event)" class="btn btn-danger btn-sm">
         <i class="fa fa-trash-o fa-fw hidden-lg" aria-hidden="true"></i>
         <span class="hidden-sm hidden-xs hidden-md">Удалить</span>
       </button>
