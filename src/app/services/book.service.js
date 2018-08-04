@@ -1,7 +1,8 @@
-import data from '../../assets/data.json'
+import data from '../../assets/data.json';
 
-export function BookService() {
+BookService.$inject = ['$cookies'];
 
+export function BookService($cookies) {
   const
     /**
      * Стандартное изображение книги
@@ -27,7 +28,11 @@ export function BookService() {
       releaseDate: null,
       isbn: null,
       image: NO_IMAGE_NAME
-    };
+    },
+    /**
+     * Хранилище cookies
+     */
+    COOKIE_STORAGE = 'bookFilter';
 
   /**
    * Список книг
@@ -52,6 +57,11 @@ export function BookService() {
 
     return ++maxId;
   };
+
+  /**
+   * Фильтр
+   */
+  this.filter = $cookies.getObject(COOKIE_STORAGE) || { value: 'title' };
 
   /**
    * Вернуть список книг
@@ -108,4 +118,9 @@ export function BookService() {
     let book = bookList.find((el) => el.id == editBook.id);
     angular.extend(book, editBook);
   };
+
+  /**
+   * Записать фильтр в cookies
+   */
+  this.rememberFilter = () => $cookies.putObject(COOKIE_STORAGE, this.filter);
 }
