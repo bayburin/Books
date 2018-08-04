@@ -14,6 +14,7 @@ import BookFormComponent from './app/components/book-form/book-form.component';
 import { BookService } from './app/services/book.service';
 import ArrToStrFilter from './app/filters/arr-to-str.filter';
 import IsbnValidator from './app/directives/isbn-validator.directive';
+import FileUploadDirective from './app/directives/file-upload.directive';
 
 angular
   .module('books', [uiRouter, 'ngMessages'])
@@ -24,4 +25,5 @@ angular
   .component('bookFormComponent', BookFormComponent)
   .service('BookService', BookService)
   .filter('arrToStr', ArrToStrFilter)
-  .directive('isbnValidator', IsbnValidator);
+  .directive('isbnValidator', IsbnValidator)
+  .directive('fileUpload', FileUploadDirective);
