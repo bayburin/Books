@@ -13,6 +13,7 @@ import BookDetailComponent from './app/components/book-detail/book-detail.compon
 import BookFormComponent from './app/components/book-form/book-form.component';
 import { BookService } from './app/services/book.service';
 import ArrToStrFilter from './app/filters/arr-to-str.filter';
+import IsbnValidator from './app/directives/isbn-validator.directive';
 
 angular
   .module('books', [uiRouter, 'ngMessages'])
@@ -22,4 +23,5 @@ angular
   .component('bookDetailComponent', BookDetailComponent)
   .component('bookFormComponent', BookFormComponent)
   .service('BookService', BookService)
-  .filter('arrToStr', ArrToStrFilter);
+  .filter('arrToStr', ArrToStrFilter)
+  .directive('isbnValidator', IsbnValidator);
