@@ -18,6 +18,7 @@ export default function BookFormController($state, $stateParams, BookService) {
       return false;
     }
 
+    BookService.prepareReleaseDate();
     this.book.id ? BookService.updateBook() : BookService.addBook();
     $state.go('books');
   };

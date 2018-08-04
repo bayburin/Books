@@ -98,7 +98,10 @@ export function BookService($cookies) {
    */
   this.getBook = (bookId) => {
     editBook = angular.copy(bookList.find((el) => el.id == bookId));
-    editBook.releaseDate = new Date(editBook.releaseDate);
+
+    if (editBook.releaseDate) {
+      editBook.releaseDate = new Date(editBook.releaseDate);
+    }
     return editBook;
   };
 
@@ -143,4 +146,21 @@ export function BookService($cookies) {
    * Записать фильтр в cookies
    */
   this.rememberFilter = () => $cookies.putObject(COOKIE_STORAGE, this.filter);
+
+  /**
+   * Преобразовать дату к виду <месяц.день.год>
+   */
+  this.prepareReleaseDate = () => {
+    let fullDate = editBook.releaseDate;
+    if (!fullDate) {
+      return false;
+    }
+
+    let
+      month = ('0' + (fullDate.getMonth() + 1)).slice(-2),
+      date = ('0' + fullDate.getDate()).slice(-2),
+      year = fullDate.getFullYear();
+
+    editBook.releaseDate = `${month}.${date}.${year}`
+  }
 }
